@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <title>ClickMilitia</title>
 </head>
-<body>
+<body v-on="load: alert('1')">
     <div id="resource">
-        <div id="Wood">
+        <div id="food">
+            <button class="click" v-on="click: addResource(resource['food'],resource.efficiency)">
+                Food +<span class="add" v-text="resource.food['addSpeed']-population.consume.cost.food*population.all.stotage"></span>/s</br>
+                <span class="storage" v-text="resource.food['storage']">0</span>/<span class="maxStorage" v-text="resource.food['maxStorage']">200</span>
+            </button>
+        </div>
+        <div id="wood">
             <button class="click" v-on="click: addResource(resource['wood'],resource.efficiency)">
                 Wood +<span class="add" v-text="resource.wood['addSpeed']"></span>/s</br>
                 <span class="storage" v-text="resource.wood['storage']">0</span>/<span class="maxStorage" v-text="resource.wood['maxStorage']">200</span>
