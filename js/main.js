@@ -27,11 +27,20 @@ var vm = new Vue({
             //人口 all是全部，分别有数量，最大数量，增加速度，每购买一个人的消耗，和维护一个人的损耗
             population: {
                 all: {
+                    name: "all",
                     storage: 0,
                     maxStorage: 20,
                     addSpeed: 0,
-                    cost: {wood: 10, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    cost: {wood: 0, food: 20, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
                     consume: {wood: 0, food: 1, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
+                },
+                farmer:{
+                    name:"farmer",
+                    storage: 0,
+                    maxStorage: 20,
+                    addSpeed: 0,
+                    cost: {wood: 5, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 0, food: -1.5, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
                 }
 
             }
@@ -51,10 +60,43 @@ var vm = new Vue({
                 if (type['storage'] < type['maxStorage']) {
                     if (cm.ifEnoughResource(type, number) == cm.resourceList.length) {
                         type['storage'] += number;
-                        cm.subtractResource(type, number)
+                        //验证是否是人口分配
+                        if(type.name =! 'all'){
+                            vm.$data.population.all['storage'] -=number;
+
+                        }
+                        cm.subtractResource(type, number);
                         for (var i = 0; i < cm.resourceList.length; i++) {
                             //计算人口损耗
                             vm.$data.resource[cm.resourceList[i]].addSpeed -= type.consume[cm.resourceList[i]] * number;
+                        }
+                    }
+                }
+            },
+            addWorker: function(type, number) {
+                if (type['storage'] < type['maxStorage']) {
+                    if (cm.ifEnoughResource(type, number) == cm.resourceList.length) {
+                        //验证是否是人口分配
+                        if(vm.$data.population.all['storage'] - number >=0){
+                            vm.$data.population.all['storage'] -= number;
+                            type['storage'] += number;
+                            cm.subtractResource(type, number);
+                            for (var i = 0; i < cm.resourceList.length; i++) {
+                                //计算人口加成
+                                vm.$data.resource[cm.resourceList[i]].addSpeed -= type.consume[cm.resourceList[i]] * number;
+                            }
+                        }
+                    }
+                }
+            },
+            subWorker: function(type, number){
+                if (type['storage'] >= number) {
+                    if(vm.$data.population.all['storage'] + number <= vm.$data.population.all['maxStorage']){
+                        vm.$data.population.all['storage'] += number;
+                        type['storage'] -= number;
+                        for (var i = 0; i < cm.resourceList.length; i++) {
+                            //去除人口加成
+                            vm.$data.resource[cm.resourceList[i]].addSpeed += type.consume[cm.resourceList[i]] * number;
                         }
                     }
                 }
@@ -73,7 +115,7 @@ var cm = {
     },
     //资源减少
     subResource: function (resource,efficiency) {
-        if (resource['storage'] > 0){
+        if (resource['storage'] > efficiency){
             resource['storage'] -= efficiency;
         }
     },
