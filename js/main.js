@@ -13,16 +13,15 @@ var vm = new Vue({
             ruler: {population: 0},
             number: [1, 10, 100, 1000, 10000, 100000, 1000000],
             resource: {
-                efficiency: 1,
-                wood: {storage: 0, maxStorage: 200, addSpeed: 0},
-                food: {storage: 0, maxStorage: 200, addSpeed: 0},
-                stone: {storage: 0, maxStorage: 200, addSpeed: 0},
-                clothes: {storage: 0, maxStorage: 200, addSpeed: 0},
-                medicine: {storage: 0, maxStorage: 200, addSpeed: 0},
-                metal: {storage: 0, maxStorage: 200, addSpeed: 0},
-                gold: {storage: 0, maxStorage: 200, addSpeed: 0},
-                happy: {storage: 0, maxStorage: 200, addSpeed: 0},
-                territory: {storage: 0, maxStorage: 200, addSpeed: 0}
+                wood: {name:"wood",storage: 0, maxStorage: 200, addSpeed: 0},
+                food: {name:"food",storage: 0, maxStorage: 200, addSpeed: 0},
+                stone: {name:"stone",storage: 0, maxStorage: 200, addSpeed: 0},
+                clothes: {name:"clothes",storage: 0, maxStorage: 200, addSpeed: 0},
+                medicine: {name:"medicine",storage: 0, maxStorage: 200, addSpeed: 0},
+                metal: {name:"metal",storage: 0, maxStorage: 200, addSpeed: 0},
+                gold: {name:"gold",storage: 0, maxStorage: 200, addSpeed: 0},
+                happy: {name:"happy",storage: 0, maxStorage: 200, addSpeed: 0},
+                territory: {name:"territory",storage: 0, maxStorage: 200, addSpeed: 0}
             },
             //人口 all是全部，分别有数量，最大数量，增加速度，每购买一个人的消耗，和维护一个人的损耗
             population: {
