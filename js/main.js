@@ -40,8 +40,63 @@ var vm = new Vue({
                     addSpeed: 0,
                     cost: {wood: 5, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
                     consume: {wood: 0, food: -1.5, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
+                },
+                logger:{
+                    name:"logger",
+                    storage: 0,
+                    maxStorage: 20,
+                    addSpeed: 0,
+                    cost: {wood: 10, food: 10, stone: 20, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: -1, food: 3, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
+                },
+                quarrier:{
+                    name:"quarrier",
+                    storage: 0,
+                    maxStorage: 20,
+                    addSpeed: 0,
+                    cost: {wood: 20, food: 10, stone: 10, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 0, food: 3, stone: -1, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
+                },
+                tailor:{
+                    name:"tailor",
+                    storage: 0,
+                    maxStorage: 20,
+                    addSpeed: 0,
+                    cost: {wood: 10, food: 30, stone: 10, clothes: 20, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 0, food: 3, stone: 0, clothes: -0.5, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
+                },
+                doctor:{
+                    name:"doctor",
+                    storage: 0,
+                    maxStorage: 20,
+                    addSpeed: 0,
+                    cost: {wood: 10, food: 30, stone: 10, clothes: 0, medicine: 20, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 0, food: 3, stone: 0, clothes: 0, medicine: -0.5, metal: 0, gold: 0, happy: 0, territory: 0}
+                },
+                blacksmith:{
+                    name:"blacksmith",
+                    storage: 0,
+                    maxStorage: 20,
+                    addSpeed: 0,
+                    cost: {wood: 30, food: 50, stone: 30, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 2, food: 3, stone: 2, clothes: 0, medicine: 0, metal: 0.5, gold: 0, happy: 0, territory: 0}
+                },
+                businessman:{
+                    name:"businessman",
+                    storage: 0,
+                    maxStorage: 20,
+                    addSpeed: 0,
+                    cost: {wood: 50, food: 50, stone: 50, clothes: 50, medicine: 50, metal: 50, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 5, food: 3, stone: 5, clothes: 5, medicine: 5, metal: 5, gold: -0.1, happy: 0, territory: 0}
+                },
+                actor:{
+                    name:"actor",
+                    storage: 0,
+                    maxStorage: 20,
+                    addSpeed: 0,
+                    cost: {wood: 0, food: 50, stone: 0, clothes: 100, medicine: 20, metal: 20, gold: 10, happy: 0, territory: 0},
+                    consume: {wood: 5, food: 3, stone: 5, clothes: 5, medicine: 5, metal: 5, gold: 0.5, happy: -0.5, territory: 0}
                 }
-
             }
 
         },
