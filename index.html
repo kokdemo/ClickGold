@@ -27,6 +27,23 @@
         </button>
     </div>
     <div id="worker">
+        <div v-repeat="population">
+            <div id="{{name}}">
+            <button class="click" v-on="click: addWorker(population.{{name}},number[ruler.population])">
+                +{{number[ruler.population]}}
+            </button>
+            <div>
+                {{name}}
+                <span class="add" v-text="population.{{name}}['addSpeed']"></span>/s</br>
+                <span class="storage" v-text="population.{{name}}['storage']">0</span>
+                /<span class="maxStorage" v-text="population.{{name}}['maxStorage']">200</span>
+            </div>
+            <button class="click" v-on="click: subWorker(population.{{name}},number[ruler.population])">
+                -{{number[ruler.population]}}
+            </button>
+        </div>
+        </div>
+
         <div id="farmer">
             <button class="click" v-on="click: addWorker(population.farmer,number[ruler.population])">
                 +{{number[ruler.population]}}
