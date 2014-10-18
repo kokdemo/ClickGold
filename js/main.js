@@ -13,9 +13,9 @@ var vm = new Vue({
             ruler: {population: 0},
             number: [1, 10, 100, 1000, 10000, 100000, 1000000],
             resource: {
-                wood: {name:"wood",storage: 0, maxStorage: 200, addSpeed: 0},
-                food: {name:"food",storage: 0, maxStorage: 200, addSpeed: 0},
-                stone: {name:"stone",storage: 0, maxStorage: 200, addSpeed: 0},
+                wood: {name:"wood",storage: 0, maxStorage: 200, addSpeed: 0,click:true},
+                food: {name:"food",storage: 0, maxStorage: 200, addSpeed: 0,click:true},
+                stone: {name:"stone",storage: 0, maxStorage: 200, addSpeed: 0,click:true},
                 clothes: {name:"clothes",storage: 0, maxStorage: 200, addSpeed: 0},
                 medicine: {name:"medicine",storage: 0, maxStorage: 200, addSpeed: 0},
                 metal: {name:"metal",storage: 0, maxStorage: 200, addSpeed: 0},
@@ -31,7 +31,8 @@ var vm = new Vue({
                     maxStorage: 20,
                     addSpeed: 0,
                     cost: {wood: 0, food: 20, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 1, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
+                    consume: {wood: 0, food: 1, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    display: false
                 },
                 farmer:{
                     name:"farmer",
@@ -96,6 +97,68 @@ var vm = new Vue({
                     addSpeed: 0,
                     cost: {wood: 0, food: 50, stone: 0, clothes: 100, medicine: 20, metal: 20, gold: 10, happy: 0, territory: 0},
                     consume: {wood: 5, food: 3, stone: 5, clothes: 5, medicine: 5, metal: 5, gold: 0.5, happy: -0.5, territory: 0}
+                }
+            },
+            militia:{
+                infantry:{
+                    name:"",
+                    storage: 0,
+                    maxStorage: 20,
+                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    antifootman: 10,
+                    antiarmor: 0,
+                    defence: 5
+                },
+                cavalry:{
+                    name:"",
+                    storage: 0,
+                    maxStorage: 20,
+                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    antifootman: 10,
+                    antiarmor: 0,
+                    defence: 5
+                },
+                artillery:{
+                    name:"",
+                    storage: 0,
+                    maxStorage: 20,
+                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    antifootman: 10,
+                    antiarmor: 0,
+                    defence: 5
+                },
+                panzer:{
+                    name:"",
+                    storage: 0,
+                    maxStorage: 20,
+                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    antifootman: 10,
+                    antiarmor: 0,
+                    defence: 5
+                },
+                tank:{
+                    name:"",
+                    storage: 0,
+                    maxStorage: 20,
+                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    antifootman: 10,
+                    antiarmor: 0,
+                    defence: 5
+                },
+                transporter:{
+                    name:"",
+                    storage: 0,
+                    maxStorage: 20,
+                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
+                    antifootman: 0,
+                    antiarmor: 0,
+                    defence: 5
                 }
             }
 
