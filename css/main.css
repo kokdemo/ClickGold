@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -30,6 +31,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+
 }
 ol, ul {
 	list-style: none;
@@ -49,10 +51,43 @@ table {
 
 /*css reset end*/
 
-.population-button,.resource-button{
+.population-button,.resource-button,.militia-button{
     display: inline-block;
+
 }
 
-#people,#worker{
+.resource-button{
+    width: 10%;
+    padding: 0;
+    margin: 0;
+    height: 3em;
+    vertical-align:top;
+
+border: 1px solid red;
+}
+
+#people{
     display: inline-block;
+    width: 100%;
+}
+
+#people .population-button{
+    width: 10%;
+    height: 5em;
+    padding: 0;
+    margin: 0;
+    border: 1px solid red;
+    vertical-align: top;
+}
+#people .population-button>button{
+    vertical-align: bottom;
+}
+
+#militia .militia-button{
+    width: 10%;
+    height: 5em;
+    padding: 0;
+    margin: 0;
+    border: 1px solid red;
+    vertical-align: top;
 }

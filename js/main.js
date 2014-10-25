@@ -101,7 +101,7 @@ var vm = new Vue({
             },
             militia:{
                 infantry:{
-                    name:"",
+                    name:"infantry",
                     storage: 0,
                     maxStorage: 20,
                     cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
@@ -111,7 +111,7 @@ var vm = new Vue({
                     defence: 5
                 },
                 cavalry:{
-                    name:"",
+                    name:"cavalry",
                     storage: 0,
                     maxStorage: 20,
                     cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
@@ -121,7 +121,7 @@ var vm = new Vue({
                     defence: 5
                 },
                 artillery:{
-                    name:"",
+                    name:"artillery",
                     storage: 0,
                     maxStorage: 20,
                     cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
@@ -131,7 +131,7 @@ var vm = new Vue({
                     defence: 5
                 },
                 panzer:{
-                    name:"",
+                    name:"panzer",
                     storage: 0,
                     maxStorage: 20,
                     cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
@@ -141,7 +141,7 @@ var vm = new Vue({
                     defence: 5
                 },
                 tank:{
-                    name:"",
+                    name:"tank",
                     storage: 0,
                     maxStorage: 20,
                     cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
@@ -151,7 +151,7 @@ var vm = new Vue({
                     defence: 5
                 },
                 transporter:{
-                    name:"",
+                    name:"transporter",
                     storage: 0,
                     maxStorage: 20,
                     cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
