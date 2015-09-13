@@ -45,6 +45,7 @@
 .resource-click{
     float: right;
     height: 100%;
+    padding: 0 8px !important;
 }
 .success{
     text-align: center;
@@ -53,5 +54,8 @@
 
 .am-header .am-header-title{
     margin:auto;
+}
+.am-g{
+    padding: 0;
 }
 

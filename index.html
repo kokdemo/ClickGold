@@ -15,7 +15,7 @@
         class="am-header am-header-default">
     <h1 class="am-header-title">
         <a href="#title-link" class="">
-            赚到一万块({{res['gold']['storage']}}/{{res['gold']['max']}})
+            赚到一万块({{Math.ceil(res['gold']['storage'])}}/{{res['gold']['max']}})
         </a>
     </h1>
 </header>
@@ -36,8 +36,8 @@
                 <span class="info">{{info}}</span>
             </div>
 
-            <button class="resource-click am-btn am-btn-secondary am-radius" v-if="click"
-                    v-on="click : buy('worker',worker[name],1)">
+            <button class="am-btn am-btn-secondary am-radius resource-click " v-if="click"
+                    v-on="click : buy('worker',worker[$key],1)">
                 招募
             </button>
         </div>
@@ -49,7 +49,7 @@
                 <span class="info">{{info}}</span>
             </div>
             <button class="resource-click am-btn am-btn-secondary am-radius" v-if="click"
-                    v-on="click : buy('tech',tech[name],1)">
+                    v-on="click : buy('tech',tech[$key],1)">
                 升级
             </button>
         </div>
