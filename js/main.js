@@ -117,7 +117,7 @@ var LazyGame = function (data) {
 
 var game = new LazyGame({
     res: {
-        gold: {name: "gold", info: '黄金', storage: 0, max: 1, speed: 0, click: true, display: true}
+        gold: {name: "gold", info: '黄金', storage: 0, max: 10000, speed: 0, click: true, display: true}
     },
     worker: {
         miner: {
