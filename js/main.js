@@ -97,12 +97,19 @@ var LazyGame = function (data) {
                 //calc(pop[p], (pop[p].speed * pop[p].rate));
                 if (L_buy(worker[p].cost, 1, true)) {
                     worker[p].click = true;
+                }else{
+                    worker[p].click = false;
+                }
+                if (worker[p]['storage'] == worker[p]['max']) {
+                    worker[p]['click'] = false;
                 }
             }
 //      计算科技
             for (t in tech) {
                 if (L_buy(tech[t].cost, 1, true)) {
                     tech[t].click = true;
+                }else{
+                    tech[t].click = false;
                 }
                 if (tech[t]['storage'] == tech[t]['max']) {
                     tech[t]['click'] = false;
