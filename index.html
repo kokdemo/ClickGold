@@ -19,11 +19,11 @@
         </a>
     </h1>
 </header>
-<div id="resource" class="am-u-sm-12 am-container">
+<div id="resource" class="am-g am-container">
     <div v-repeat="res" id="{{name}}" class="am-text-middle">
         <div class="resource-show" v-if="display">
             <div class="coin" v-on="click : calc(res[name],1)">
-                <span class="add">{{speed}}/s</span>
+                <span class="add">{{Math.round(speed*100)/100}}/s</span>
             </div>
         </div>
     </div>

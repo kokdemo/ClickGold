@@ -9,11 +9,12 @@
     height: 20vh;
     width: 20vh;
     margin: auto;
+    position: relative;
 }
 
 .add{
     position: absolute;
-    left: 70%;
+    left: 100%;
     bottom: 0;
     font-size: 2em;
     color: #888;
@@ -57,5 +58,8 @@
 }
 .am-g{
     padding: 0;
+}
+.am-u-sm-6{
+    padding: 5px;
 }
 

@@ -87,7 +87,6 @@ var LazyGame = function (data) {
             res[r]['speed'] = speed[r];
         }
     };
-
     this.resourse = function () {
         setInterval(function () {
 //      计算资源
@@ -124,7 +123,7 @@ var LazyGame = function (data) {
 
 var game = new LazyGame({
     res: {
-        gold: {name: "gold", info: '黄金', storage: 0, max: 10000, speed: 0, click: true, display: true}
+        gold: {name: "gold", info: '黄金', storage: 0, max: 10, speed: 0, click: true, display: true}
     },
     worker: {
         miner: {
@@ -210,7 +209,7 @@ var game = new LazyGame({
             display: true
         },
         gold4: {
-            name: '高级挖掘',
+            name: '蓝翔',
             info: '2000金币|提升5%',
             storage: 0,
             max: 1,
