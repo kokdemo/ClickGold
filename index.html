@@ -2,69 +2,72 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>ClickMilitia</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>赚到一万块</title>
+    <link href="//cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
-<div id="resource">
-    <div v-repeat="resource" id="{{name}}" class="resource-button">
-        <button class="resource-click" v-if="{{click}} == true " v-on="click: addResource(resource.{{name}},number[0])">
-            {{name}}
-            <span class="add">{{addSpeed}}</span>/s</br>
-            <span class="storage">{{storage}}</span>
-            /<span class="maxStorage">{{maxStorage}}</span>
-        </button>
-        <div class="resource-show" v-if="{{click}} != true ">
-            {{name}}
-            <span class="add">{{addSpeed}}</span>/s</br>
-            <span class="storage">{{storage}}</span>
-            /<span class="maxStorage">{{maxStorage}}</span>
-        </div>
-    </div>
-</div>
-<div id="population">
-    <div id="people" class="">
-        <div v-repeat="population" class="population-button" id="{{name}}">
-                <button v-if="{{display}} !=false" class="population-click"
-                        v-on="click: subWorker(population.{{name}},number[ruler.population])">
-                    -{{number[ruler.population]}}
-                </button>
-                <div >
-                    {{name}}
-                    <span class="add" v-text="population.{{name}}['addSpeed']"></span>/s</br>
-                    <span class="storage" v-text="population.{{name}}['storage']">0</span>
-                    /<span class="maxStorage" v-text="population.{{name}}['maxStorage']">200</span>
-                </div>
-                <button  class="population-click"
-                        v-on="click: addWorker(population.{{name}},number[ruler.population])">
-                    +{{number[ruler.population]}}
-                </button>
-        </div>
-    </div>
-    <div id="militia">
-        <div v-repeat="militia" id="{{name}}" class="militia-button">
-            <div v-if="{{display}} !=false">
-                <button class="population-click"
-                        v-on="click: subWorker(militia.{{name}},number[ruler.population])">
-                    -{{number[ruler.population]}}
-                </button>
-                <div>
-                    {{name}}</br>
-                    <span class="storage" v-text="militia.{{name}}['storage']">0</span>
-                    /<span class="maxStorage" v-text="militia.{{name}}['maxStorage']">200</span>
-                </div>
-                <button class="population-click"
-                        v-on="click: addWorker(militia.{{name}},number[ruler.population])">
-                    +{{number[ruler.population]}}
-                </button>
+<header data-am-widget="header"
+        class="am-header am-header-default">
+    <h1 class="am-header-title">
+        <a href="#title-link" class="">
+            赚到一万块({{res['gold']['storage']}}/{{res['gold']['max']}})
+        </a>
+    </h1>
+</header>
+<div id="resource" class="am-u-sm-12 am-container">
+    <div v-repeat="res" id="{{name}}" class="am-text-middle">
+        <div class="resource-show" v-if="display">
+            <div class="coin" v-on="click : calc(res[name],1)">
+                <span class="add">{{speed}}/s</span>
             </div>
         </div>
     </div>
 </div>
+<div id="upgrade" class="am-g am-container" v-if="res['gold']['storage'] != res['gold']['max']">
+    <div id="worker" class="am-u-sm-6">
+        <div v-repeat="worker" id="{{name}}" v-show="display" class="resource-button am-text-middle ">
+            <div class="infos">
+                <span class="name">{{name}} x{{storage}} </span>
+                <span class="info">{{info}}</span>
+            </div>
+
+            <button class="resource-click am-btn am-btn-secondary am-radius" v-if="click"
+                    v-on="click : buy('worker',worker[name],1)">
+                招募
+            </button>
+        </div>
+    </div>
+    <div id="tech" class="am-u-sm-6">
+        <div v-repeat="tech" id="{{name}}" v-show="display" class="resource-button am-text-middle ">
+            <div class="infos">
+                <span class="name">{{name}}</span>
+                <span class="info">{{info}}</span>
+            </div>
+            <button class="resource-click am-btn am-btn-secondary am-radius" v-if="click"
+                    v-on="click : buy('tech',tech[name],1)">
+                升级
+            </button>
+        </div>
+    </div>
+</div>
+<div class="success am-container" v-if="res['gold']['storage'] == res['gold']['max']">
+    <h1>恭喜您赚够了一万块！</h1>
+    <h4>现在大概能买一个iphone了吧……</h4>
+    <button class="resource-click am-btn am-btn-secondary am-radius" onclick="window.location.reload()">
+        再来一次
+    </button>
+</div>
+
 
 <!--js-->
 <script src="js/vue.js"></script>
 <script src="js/jquery.js"></script>
+<script src="//cdn.amazeui.org/amazeui/2.4.2/js/amazeui.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

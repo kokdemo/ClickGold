@@ -1,285 +1,243 @@
-/**
- * Created by JiaHao on 2014/10/10 0010.
- */
-/**
- * vm是vuejs的核心对象，由于数据已经绑定，因此数据修改在vm.$data上完成。
- * cm封装全局对象和方法，封装好的方法在jquery中直接执行之外，也供vuejs的方法调用。
- * vm的方法中会封装一些页面上的方法。
-*/
-
-var vm = new Vue({
-        el: 'body',
-        data: {
-            ruler: {population: 0},
-            number: [1, 10, 100, 1000, 10000, 100000, 1000000],
-            resource: {
-                wood: {name:"wood",storage: 0, maxStorage: 200, addSpeed: 0,click:true},
-                food: {name:"food",storage: 0, maxStorage: 200, addSpeed: 0,click:true},
-                stone: {name:"stone",storage: 0, maxStorage: 200, addSpeed: 0,click:true},
-                clothes: {name:"clothes",storage: 0, maxStorage: 200, addSpeed: 0},
-                medicine: {name:"medicine",storage: 0, maxStorage: 200, addSpeed: 0},
-                metal: {name:"metal",storage: 0, maxStorage: 200, addSpeed: 0},
-                gold: {name:"gold",storage: 0, maxStorage: 200, addSpeed: 0},
-                happy: {name:"happy",storage: 0, maxStorage: 200, addSpeed: 0},
-                territory: {name:"territory",storage: 0, maxStorage: 200, addSpeed: 0}
-            },
-            //人口 all是全部，分别有数量，最大数量，增加速度，每购买一个人的消耗，和维护一个人的损耗
-            population: {
-                all: {
-                    name: "all",
-                    storage: 0,
-                    maxStorage: 20,
-                    addSpeed: 0,
-                    cost: {wood: 0, food: 20, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 1, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    display: false
-                },
-                farmer:{
-                    name:"farmer",
-                    storage: 0,
-                    maxStorage: 20,
-                    addSpeed: 0,
-                    cost: {wood: 5, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: -1.5, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
-                },
-                logger:{
-                    name:"logger",
-                    storage: 0,
-                    maxStorage: 20,
-                    addSpeed: 0,
-                    cost: {wood: 10, food: 10, stone: 20, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: -1, food: 3, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
-                },
-                quarrier:{
-                    name:"quarrier",
-                    storage: 0,
-                    maxStorage: 20,
-                    addSpeed: 0,
-                    cost: {wood: 20, food: 10, stone: 10, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 3, stone: -1, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
-                },
-                tailor:{
-                    name:"tailor",
-                    storage: 0,
-                    maxStorage: 20,
-                    addSpeed: 0,
-                    cost: {wood: 10, food: 30, stone: 10, clothes: 20, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 3, stone: 0, clothes: -0.5, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0}
-                },
-                doctor:{
-                    name:"doctor",
-                    storage: 0,
-                    maxStorage: 20,
-                    addSpeed: 0,
-                    cost: {wood: 10, food: 30, stone: 10, clothes: 0, medicine: 20, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 3, stone: 0, clothes: 0, medicine: -0.5, metal: 0, gold: 0, happy: 0, territory: 0}
-                },
-                blacksmith:{
-                    name:"blacksmith",
-                    storage: 0,
-                    maxStorage: 20,
-                    addSpeed: 0,
-                    cost: {wood: 30, food: 50, stone: 30, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 2, food: 3, stone: 2, clothes: 0, medicine: 0, metal: 0.5, gold: 0, happy: 0, territory: 0}
-                },
-                businessman:{
-                    name:"businessman",
-                    storage: 0,
-                    maxStorage: 20,
-                    addSpeed: 0,
-                    cost: {wood: 50, food: 50, stone: 50, clothes: 50, medicine: 50, metal: 50, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 5, food: 3, stone: 5, clothes: 5, medicine: 5, metal: 5, gold: -0.1, happy: 0, territory: 0}
-                },
-                actor:{
-                    name:"actor",
-                    storage: 0,
-                    maxStorage: 20,
-                    addSpeed: 0,
-                    cost: {wood: 0, food: 50, stone: 0, clothes: 100, medicine: 20, metal: 20, gold: 10, happy: 0, territory: 0},
-                    consume: {wood: 5, food: 3, stone: 5, clothes: 5, medicine: 5, metal: 5, gold: 0.5, happy: -0.5, territory: 0}
-                }
-            },
-            militia:{
-                infantry:{
-                    name:"infantry",
-                    storage: 0,
-                    maxStorage: 20,
-                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    antifootman: 10,
-                    antiarmor: 0,
-                    defence: 5
-                },
-                cavalry:{
-                    name:"cavalry",
-                    storage: 0,
-                    maxStorage: 20,
-                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    antifootman: 10,
-                    antiarmor: 0,
-                    defence: 5
-                },
-                artillery:{
-                    name:"artillery",
-                    storage: 0,
-                    maxStorage: 20,
-                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    antifootman: 10,
-                    antiarmor: 0,
-                    defence: 5
-                },
-                panzer:{
-                    name:"panzer",
-                    storage: 0,
-                    maxStorage: 20,
-                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    antifootman: 10,
-                    antiarmor: 0,
-                    defence: 5
-                },
-                tank:{
-                    name:"tank",
-                    storage: 0,
-                    maxStorage: 20,
-                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    antifootman: 10,
-                    antiarmor: 0,
-                    defence: 5
-                },
-                transporter:{
-                    name:"transporter",
-                    storage: 0,
-                    maxStorage: 20,
-                    cost: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    consume: {wood: 0, food: 0, stone: 0, clothes: 0, medicine: 0, metal: 0, gold: 0, happy: 0, territory: 0},
-                    antifootman: 0,
-                    antiarmor: 0,
-                    defence: 5
-                }
-            }
-
-        },
-        filters: {
-        },
-        methods: {
-            addResource: function (resource, efficiency) {
-                cm.addResource(resource, efficiency);
-            },
-            subtractResource: function (type, number) {
-                cm.subtractResource(type,number);
-            },
-            //购买人口
-            addPeople: function (type, number) {
-                if (type['storage'] < type['maxStorage']) {
-                    if (cm.ifEnoughResource(type, number) == cm.resourceList.length) {
-                        type['storage'] += number;
-                        //验证是否是人口分配
-                        if(type.name =! 'all'){
-                            vm.$data.population.all['storage'] -=number;
-
-                        }
-                        cm.subtractResource(type, number);
-                        for (var i = 0; i < cm.resourceList.length; i++) {
-                            //计算人口损耗
-                            vm.$data.resource[cm.resourceList[i]].addSpeed -= type.consume[cm.resourceList[i]] * number;
-                        }
-                    }
-                }
-            },
-            addWorker: function(type, number) {
-                if (type['storage'] < type['maxStorage']) {
-                    if (cm.ifEnoughResource(type, number) == cm.resourceList.length) {
-                        //验证是否是人口分配
-                        if(vm.$data.population.all['storage'] - number >=0){
-                            vm.$data.population.all['storage'] -= number;
-                            type['storage'] += number;
-                            cm.subtractResource(type, number);
-                            for (var i = 0; i < cm.resourceList.length; i++) {
-                                //计算人口加成
-                                vm.$data.resource[cm.resourceList[i]].addSpeed -= type.consume[cm.resourceList[i]] * number;
-                            }
-                        }
-                    }
-                }
-            },
-            subWorker: function(type, number){
-                if (type['storage'] >= number) {
-                    if(vm.$data.population.all['storage'] + number <= vm.$data.population.all['maxStorage']){
-                        vm.$data.population.all['storage'] += number;
-                        type['storage'] -= number;
-                        for (var i = 0; i < cm.resourceList.length; i++) {
-                            //去除人口加成
-                            vm.$data.resource[cm.resourceList[i]].addSpeed += type.consume[cm.resourceList[i]] * number;
-                        }
-                    }
-                }
-            }
-        }
-    })
-    ;
- var show = vm.$data.resource;
-var cm = {
-    resourceList:['wood', 'food', 'stone', 'clothes', 'medicine', 'metal', 'gold', 'happy', 'territory'],
-    //资源增加
-    addResource: function (resource, efficiency) {
-        if (resource['storage'] < resource['maxStorage']) {
-            resource['storage'] += efficiency;
-        }
-    },
-    //资源减少
-    subResource: function (resource,efficiency) {
-        if (resource['storage'] > efficiency){
-            resource['storage'] -= efficiency;
-        }
-    },
-    //资源减少，有校验，可以认为是资源购买过程
-    ifEnoughResource: function(type,number){
-        var temp = vm.$data.resource;
-        var check = 0;
-        var resLength = cm.resourceList.length;
-        for (var i = 0; i < resLength; i++) {
-            var tempObject = temp[cm.resourceList[i]];
-            if (tempObject.storage - type.cost[cm.resourceList[i]] * number >= 0) {
-                check++;
-            }
-        }
-        return check
-    },
-    subtractResource: function (type, number) {
-        var temp = vm.$data.resource;
-        var resLength = cm.resourceList.length;
-        var check = this.ifEnoughResource(type,number);
-        console.info(check);
-        if (check == resLength) {
-            for (var i = 0; i < resLength; i++) {
-                temp[cm.resourceList[i]].storage -= type.cost[cm.resourceList[i]] * number;
-            }
-            return 1
+/*
+ * 一共有三种对象，单位（名称，数量，最大值, 耗费,变化，比率，可点击,显示），资源（名称，数量，最大值，变化 ，比率 ,显示），科技（名称，数量，耗费，解锁, 显示）
+ * */
+var LazyGame = function (data) {
+    this.data = data;
+    var worker = data.worker;
+    var res = data.res;
+    var tech = data.tech;
+    //计算能否进行运算
+    var L_calc = function (r, num) {
+        var sum = r['storage'] + num;
+        if (sum > r['max']) {
+            r['storage'] = r['max'];
+            return false
+        } else if (sum < 0) {
+            return false
         } else {
-            return 0
+            r['storage'] = sum;
         }
-    },
-    liquidateResource: function () {
-        var temp = vm.$data.resource;
-            setInterval(function () {
-                for (var i = 0; i < cm.resourceList.length; i++) {
-                    var tempResource =temp[cm.resourceList[i]];
-                    //cm.subResource(temp[cm.resourceList[i]].storage,temp[cm.resourceList[i]].addSpeed);
-                    if(tempResource.storage > 0){
-                        temp[cm.resourceList[i]].storage += tempResource.addSpeed;
-                    }
-                    //temp[cm.resourceList[i]].storage += temp[cm.resourceList[i]].addSpeed;
+    };
+    this.L_calc = L_calc;
+    var L_ruler = function (r, num) {
+        if (r['storage'] + num > r['max']) {
+            return false
+        } else {
+            return true
+        }
+    };
+    this.L_ruler = L_ruler;
+    //计算能否进行购买,num为数字，则计算能否购买这么多
+    var L_buy = function (unit, num) {
+        var u;
+        for (u in unit) {
+            if (unit[u] * num > res[u]['storage']) {
+                return false
+            }
+        }
+        return true
+    };
+    this.L_buy = L_buy;
+    //
+    var L_cost = function (unit, num) {
+        var u;
+        for (u in unit) {
+            res[u]['storage'] = res[u]['storage'] - unit[u] * num;
+        }
+    };
+    this.L_cost = L_cost;
+    //开始动态计算数据
+    var speed = {gold: 0};
+    this.addWorker = function (unit, num) {
+        if (L_buy(unit['cost'], num) && L_ruler(unit, num)) {
+            L_cost(unit['cost'], num);
+            L_calc(unit, num);
+            updateSpeed();
+        }
+    };
+    this.addTech = function (unit, num) {
+        if (L_buy(unit['cost'], num) && L_ruler(unit, num)) {
+            L_cost(unit['cost'], num);
+            L_calc(unit, num);
+            console.info('tech success');
+            updateSpeed();
+        }
+    };
+    var updateSpeed = function () {
+        var r, p, t;
+        speed = {gold: 0};
+        for (p in worker) {
+            var temp_r;
+            for (temp_r in worker[p]['res']) {
+                speed[temp_r] += worker[p]['res'][temp_r] * worker[p]['storage'];
+            }
+        }
+        console.info(speed);
+        for (t in tech) {
+            var temp_t;
+            for (temp_t in tech[t]['res']) {
+                if (tech[t]['storage'] != 0) {
+                    console.info(speed[temp_t]);
+                    speed[temp_t] = speed[temp_t] * tech[t]['res'][temp_t] * tech[t]['storage'];
                 }
-            }, 1000);
-    },
-    init: function () {
-        this.liquidateResource();
+
+            }
+        }
+        for (r in res) {
+            res[r]['speed'] = speed[r];
+        }
+    };
+
+    this.resourse = function () {
+        setInterval(function () {
+//      计算资源
+            var r, p, t;
+//      计算单位
+            for (p in worker) {
+                //calc(pop[p], (pop[p].speed * pop[p].rate));
+                if (L_buy(worker[p].cost, 1, true)) {
+                    worker[p].click = true;
+                }
+            }
+//      计算科技
+            for (t in tech) {
+                if (L_buy(tech[t].cost, 1, true)) {
+                    tech[t].click = true;
+                }
+                if (tech[t]['storage'] == tech[t]['max']) {
+                    tech[t]['click'] = false;
+                }
+            }
+            for (r in res) {
+                L_calc(res[r], (res[r].speed));
+            }
+        }, 1000);
     }
 };
-$(document).ready(function(){
-    cm.init();
+
+var game = new LazyGame({
+    res: {
+        gold: {name: "gold", info: '黄金', storage: 0, max: 1, speed: 0, click: true, display: true}
+    },
+    worker: {
+        miner: {
+            name: "普通矿工",
+            info: '25金币',
+            storage: 0,
+            max: 99,
+            speed: 0,
+            rate: 0,
+            cost: {gold: 25},
+            res: {gold: 0.5},
+            click: false,
+            display: true
+        },
+        miner2: {
+            name: "稀有矿工",
+            info: '45金币',
+            storage: 0,
+            max: 99,
+            speed: 0,
+            rate: 0,
+            cost: {gold: 45},
+            res: {gold: 1},
+            click: false,
+            display: true
+        },
+        miner3: {
+            name: "史诗矿工",
+            info: '85金币',
+            storage: 0,
+            max: 99,
+            speed: 0,
+            rate: 0,
+            cost: {gold: 85},
+            res: {gold: 2},
+            click: false,
+            display: true
+        },
+        miner4: {
+            name: "传说矿工",
+            info: '165金币',
+            storage: 0,
+            max: 99,
+            speed: 0,
+            rate: 0,
+            cost: {gold: 165},
+            res: {gold: 4},
+            click: false,
+            display: true
+        },
+        miner5: {
+            name: "探矿器",
+            info: '320金币',
+            storage: 0,
+            max: 99,
+            speed: 0,
+            rate: 0,
+            cost: {gold: 320},
+            res: {gold: 8},
+            click: false,
+            display: true
+        }
+    },
+    tech: {
+        gold2: {
+            name: '初级挖掘',
+            info: '200金币|提升10%',
+            storage: 0,
+            max: 1,
+            cost: {gold: 200},
+            res: {gold: 1.1},
+            click: false,
+            display: true
+        },
+        gold3: {
+            name: '中级挖掘',
+            info: '1000金币|提升5%',
+            storage: 0,
+            max: 1,
+            cost: {gold: 1000},
+            res: {gold: 1.05},
+            click: false,
+            display: true
+        },
+        gold4: {
+            name: '高级挖掘',
+            info: '2000金币|提升5%',
+            storage: 0,
+            max: 1,
+            cost: {gold: 2000},
+            res: {gold: 1.05},
+            click: false,
+            display: true
+        },
+        gold5: {
+            name: '炼金术',
+            info: '4000金币|提升20%',
+            storage: 0,
+            max: 1,
+            cost: {gold: 4000},
+            res: {gold: 1.2},
+            click: false,
+            display: true
+        }
+    }
+});
+game.resourse();
+var vm = new Vue({
+    el: 'body',
+    data: game['data'],
+    methods: {
+        buy: function (type, unit, num) {
+            if (type == 'worker') {
+                game.addWorker(unit, num);
+            } else {
+                game.addTech(unit, num);
+            }
+        },
+        calc: function (unit, num) {
+            game.L_calc(unit, num);
+        }
+    }
 });
